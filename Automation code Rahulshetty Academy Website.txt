@@ -1,0 +1,69 @@
+package AllTestCases;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.server.handler.SwitchToFrame;
+import org.openqa.selenium.support.ui.Select;
+
+public class democode {
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver","D:\\Driver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		//radio button
+		driver.findElement(By.xpath("//input[@value='radio1']")).click();
+		//Suggesion class
+		driver.findElement(By.id("autocomplete")).sendKeys("india");
+		List<WebElement>list=driver.findElements(By.xpath("//li[@class='ui-menu-item']"));
+		for(WebElement lists:list)
+		{
+			if(lists.getText().equalsIgnoreCase("india"))
+			{
+				lists.click();
+				break;
+			}
+		}
+		//dropdown
+		Select s=new Select(driver.findElement(By.id("dropdown-class-example")));
+		s.selectByIndex(2);
+		s.selectByVisibleText("Option1");
+		
+		//checkbox
+		driver.findElement(By.id("checkBoxOption1")).click();
+		driver.findElement(By.id("checkBoxOption3")).click();
+		//open new window
+		driver.findElement(By.id("openwindow")).click();
+		//new tab
+		driver.findElement(By.id("opentab")).click();
+		//alert
+		driver.findElement(By.id("name")).sendKeys("Lakshmi");
+		driver.findElement(By.id("alertbtn")).click();
+		driver.switchTo().alert().accept();
+		driver.findElement(By.id("confirmbtn")).click();
+		driver.switchTo().alert().dismiss();
+		
+		//hide and show content
+		driver.findElement(By.id("displayed-text")).sendKeys("Lakshmi priya");
+		driver.findElement(By.id("hide-textbox")).click();
+		driver.findElement(By.id("show-textbox")).click();
+		
+		//mouse hover
+		Actions actions=new Actions(driver);
+		actions
+		.moveToElement(driver.findElement(By.id("mousehover")))
+		.moveToElement(driver.findElement(By.xpath("//a[.='Reload']"))).click()
+		
+		.build().perform();
+		//driver.findElement(By.xpath("//a[.='Top']")).click();
+		
+	}
+	 
+
+	}
+
+
